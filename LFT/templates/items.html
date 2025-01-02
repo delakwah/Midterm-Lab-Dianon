@@ -1,0 +1,23 @@
+{% extends "index.html" %}
+{% load static %}
+
+{% block title %} Lost Items {% endblock %}
+
+{%block content%}
+  <div class="container mt-5">
+    <h1 class="mb-4" style="color: whitesmoke">Lost Items</h1>
+    <div class="list-group" style="background-color: black;">
+        {% for item in items %}
+        <a href="{% url 'detail' item.pk %}" class="list-group-item list-group-item-action" style="background-color: #242526; color: whitesmoke;">
+            <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1">{{ item.item_name }}</h5>
+                <small>{{ item.date_lost }}</small>
+            </div>
+            <p class="mb-1">{{ item.description|truncatechars:100 }}</p>
+            <small>Location: {{ item.location }}</small>
+        </a>
+        {% endfor %}
+    </div>
+  </div>
+
+{% endblock %}

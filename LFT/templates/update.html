@@ -1,0 +1,20 @@
+{% extends "index.html" %}
+{% load static %}
+
+{% block title %} {{item.name}} {% endblock %}
+
+{%block content%}
+
+<body style="background-color: black; color: whitesmoke;">
+    <div class="container mt-5">
+        <h1 class="mb-4">Update Item: {{ item.name }}</h1>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-success">Save Changes</button>
+            <a href="{% url 'items' %}" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
+</body>
+
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends "index.html" %}
+{% load static %}
+
+{% block title %} Lost Items {% endblock %}
+
+{%block content%}
+<body style="background-color: black; color: whitesmoke;">
+    <div class="container mt-5">
+        <h1 class="mb-4">Add Lost Item</h1>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+        <a href="{% url 'items' %}" class="btn btn-secondary mt-3">Back to List</a>
+    </div>
+</body>
+{% endblock %}
