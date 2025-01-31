@@ -1,4 +1,4 @@
-{% extends "index.html" %}
+{% extends "extender/index.html" %}
 {% load static %}
 
 {% block title %} Lost Items {% endblock %}
@@ -13,8 +13,20 @@
                 <h5 class="mb-1">{{ item.item_name }}</h5>
                 <small>{{ item.date_lost }}</small>
             </div>
-            <p class="mb-1">{{ item.description|truncatechars:100 }}</p>
-            <small>Location: {{ item.location }}</small>
+            <div class="d-flex align-items-center">
+              {% if item.image %}
+              <img src="{{ item.image.url }}" alt="{{ item.item_name }}" class="me-3" style="width: 100px; height: 100px; object-fit: cover; border-radius: 5px;">
+              {% else %}
+              <img src="{% static 'images/default.png' %}" alt="No image available" class="me-3" style="width: 100px; height: 100px; object-fit: cover; border-radius: 5px;">
+              {% endif %}
+              <div>
+                  <p class="mb-1">{{ item.description|truncatechars:100 }}</p>
+                  <small>Location: {{ item.location }}</small><br>
+                  <small>Reported by: {{ item.created_by }}</small><br>
+                  <small>Status: {{ item.status }}</small><br>
+                  <small>Contact: {{ item.contact_info }}</small>
+              </div>
+          </div>
         </a>
         {% endfor %}
     </div>

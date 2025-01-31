@@ -1,0 +1,49 @@
+{% extends 'extender/index.html' %}
+{% load static %}
+
+{% block title %}Profile{% endblock %}
+
+{% block content %}
+<style>
+    .text-muted {
+        color:rgba(198, 227, 255, 0.75) !important;
+    }
+</style>
+
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <!-- Profile Card -->
+            <div class="card shadow-lg rounded-lg bg-dark text-light" style="background-color: rgba(0, 0, 0, 0.8);">
+                <div class="card-body">
+                    <div class="row">
+                        <!-- User Info -->
+                        <div class="col-md-8">
+                            <h3 class="card-title text-center text-info">{{ user.username }}</h3>
+                            <hr class="text-info">
+                            <h5>Email: <span class="text-muted">{{ user.email }}</span></h5>
+                            <h5>Joined: <span class="text-muted">{{ user.date_joined|date:"F j, Y" }}</span></h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- User Posts or Other Sections (Optional) -->
+            <div class="mt-5">
+                <h4 class="text-light">Your Posts</h4>
+                <div class="list-group">
+                    {% for post in user.posts.all %}
+                    <a href="{% url 'post_detail' post.pk %}" class="list-group-item list-group-item-action bg-dark text-light border-0">
+                        <h5>{{ post.title }}</h5>
+                        <p>{{ post.body|truncatechars:150 }}</p>
+                    </a>
+                    {% empty %}
+                    <p class="text-muted">No posts to show.</p>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
